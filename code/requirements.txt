@@ -1,0 +1,7 @@
+opencv-contrib-python==4.3.0.36
+opencv-python==4.3.0.36
+segmentation-models
+numpy
+matplotlib
+tensorflow
+keras
