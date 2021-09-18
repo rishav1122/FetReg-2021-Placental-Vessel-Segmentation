@@ -22,9 +22,9 @@
 ## Dataset[1]
 
 #### Fetoscopy videos acquired from the three different fetal medicine centers are first decomposed into frames, and excess black background is cropped to obtain squared images capturing mainly the fetoscope field-of-view. From each video, a subset of 100-150 non-overlapping informative frames was selected and manually annotated. All pixels in each image are labeled with   
-_background (0),_. 
-_placental vessel (1), _  
-_ablation tool (2), _. 
+_background (0),_  
+_placental vessel (1),_    
+_ablation tool (2),_     
 _fetus (3)_  
 
 ![Summary](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/summary.png)  
@@ -45,14 +45,14 @@ Figure 1: Summary of the dataset
 ## Augmentation
 
 #### Each time in training, different images were created using original images by applying augmentation on them. The techniques used in image augmentation were (1) Randomrotate90 which rotates images randomly in multiples of 90 degrees, and (2) Horizontal flip, which flips the image.  Since the scans would lie in almost the same color range, techniques like PCA_whitening and HSV_shifting were not used.
-![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/augmentation.png)
-
+<!-- ![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/augmentation.png) -->
+<img src="https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/augmentation.png" width="900" >
 
 ## Model Architecture
 
 #### The U-Net[2] architecture was used with ResNet-101 as the backbone. The pre-trained Imagenet weights were used to initialize the model. The Image is continuously contracted as passed through convolution layers. The size goes from 480 x 480 to 30 x30 by continuously contracting into half in each step and then upsampled back to 480 x 480.
 
-${image?fileName=The%2Darchitecture%2Dof%2DUnet%2Epng&align=Center&scale=100&responsive=true&altText=unet}
+![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/Unet.png)
 #### We also tried using other architectures such as LinkNet[5] and PSPNet[4]. For PSPNet, the images were resized to 384 x 384. The PSPNet got trained 5 times faster than LinkNet and U-Net. The PSPNet achieved the lowest mean IOU among all the architecture
 
 ![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/model.png)
@@ -86,10 +86,11 @@ ${image?fileName=The%2Darchitecture%2Dof%2DUnet%2Epng&align=Center&scale=100&res
 
 
 #### The model was trained on 85% of the dataset with 15% as validation. The objective was to maximize the validation IOU score. The learning scheduler was used to decrease the learning rate with the number of epochs with certain factors. The value of this factor was taken as 0.9. The model was trained on a computer with 3 NVIDIA GeForce GTX 1080 Ti with 11176MiB RAM each and 24 Intel(R) Xeon(R) CPU E5-2620 0 @ 2.00GHz processor. The model was trained on all 3 GPUs in mirror training mode. The model was trained for 50 epochs with a batch size of 8.
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/loss.png)
 ## Testing random testing images
 ![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/test2.png)
-![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/test1.png)
+<!-- ![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/test1.png) -->
+<img src="https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/test1.png" width="900" >
 
 # **Conclusion/Discussion**
 
