@@ -87,7 +87,7 @@ Figure 1: Summary of the dataset
 
 #### The model was trained on 85% of the dataset with 15% as validation. The objective was to maximize the validation IOU score. The learning scheduler was used to decrease the learning rate with the number of epochs with certain factors. The value of this factor was taken as 0.9. The model was trained on a computer with 3 NVIDIA GeForce GTX 1080 Ti with 11176MiB RAM each and 24 Intel(R) Xeon(R) CPU E5-2620 0 @ 2.00GHz processor. The model was trained on all 3 GPUs in mirror training mode. The model was trained for 50 epochs with a batch size of 8.
 ![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/loss.png)
-## Testing random testing images
+## Testing random untrained images
 ![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/test2.png)
 <!-- ![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/test1.png) -->
 <img src="https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/test1.png" width="900" >
