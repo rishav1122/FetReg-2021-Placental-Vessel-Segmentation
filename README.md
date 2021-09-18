@@ -21,13 +21,15 @@
 
 ## Dataset[1]
 
-#### Fetoscopy videos acquired from the three different fetal medicine centers are first decomposed into frames, and excess black background is cropped to obtain squared images capturing mainly the fetoscope field-of-view. From each video, a subset of 100-150 non-overlapping informative frames was selected and manually annotated. All pixels in each image are labeled with 
-_background (0),_
-_placental vessel (1), _
-_ablation tool (2), _
-_fetus (3)_
+#### Fetoscopy videos acquired from the three different fetal medicine centers are first decomposed into frames, and excess black background is cropped to obtain squared images capturing mainly the fetoscope field-of-view. From each video, a subset of 100-150 non-overlapping informative frames was selected and manually annotated. All pixels in each image are labeled with   
+_background (0),_. 
+_placental vessel (1), _  
+_ablation tool (2), _. 
+_fetus (3)_  
 
-${image?fileName=summary%2Epng&align=Center&scale=80&responsive=true&altText=dataset%5Fsummary}
+![Summary](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/summary.png)  
+
+
 Figure 1: Summary of the dataset
 
 
@@ -38,12 +40,12 @@ Figure 1: Summary of the dataset
 
 #### The images downloaded were of low contrast and some images had a limited range of intensities. We use the contrast limited AHE (CLAHE) technique to improve contrast. It accomplishes this by effectively spreading out the most frequent intensity values. It differs from adaptive histogram equalization in its contrast limiting. In the case of CLAHE, the contrast limiting procedure is applied to each neighborhood from which a transformation function is derived. It prevents the over-amplification of noise that adaptive histogram equalization can give rise to. All the images were resized to 480 x 480 and normalized before passing to the model. The masks were interpolated using  Inter_Nearest otherwise ground truth changes due to interpolation
 
-${image?fileName=Screenshot 2021%2D09%2D18 at 11%2E09%2E12 AM%2Epng&align=Center&scale=100&responsive=true&altText=finalclahe}
+![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/clahe.png)
 
 ## Augmentation
 
 #### Each time in training, different images were created using original images by applying augmentation on them. The techniques used in image augmentation were (1) Randomrotate90 which rotates images randomly in multiples of 90 degrees, and (2) Horizontal flip, which flips the image.  Since the scans would lie in almost the same color range, techniques like PCA_whitening and HSV_shifting were not used.
-${image?fileName=augmentation%2Epng&align=Center&scale=100&responsive=true&altText=augmentation}
+![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/augmentation.png)
 
 
 ## Model Architecture
@@ -53,9 +55,9 @@ ${image?fileName=augmentation%2Epng&align=Center&scale=100&responsive=true&altTe
 ${image?fileName=The%2Darchitecture%2Dof%2DUnet%2Epng&align=Center&scale=100&responsive=true&altText=unet}
 #### We also tried using other architectures such as LinkNet[5] and PSPNet[4]. For PSPNet, the images were resized to 384 x 384. The PSPNet got trained 5 times faster than LinkNet and U-Net. The PSPNet achieved the lowest mean IOU among all the architecture
 
-${image?fileName=Screenshot 2021%2D09%2D18 at 12%2E25%2E17 PM%2Epng&align=Center&scale=100&responsive=true&altText=models}
+![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/model.png)
 
-${image?fileName=Screenshot 2021%2D09%2D18 at 12%2E13%2E59 PM%2Epng&align=Center&scale=100&responsive=true&altText=compare}
+![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/table.png)
 #### The Important point to note is that among the four classes U-Net with Resnet101 backbone has higher  IOU for only class 1, but it also achieves the highest MeanIOU because of consistent IOU over classes. U-Net with ResNet34 achieves the highest IOU over classes 0 and 3, but it has a significantly lower IOU on other two classes, which leads to the lower MeanIOU. 
 
 ##  Loss Function 
@@ -65,29 +67,29 @@ ${image?fileName=Screenshot 2021%2D09%2D18 at 12%2E13%2E59 PM%2Epng&align=Center
 #### _Dice loss:_
 
 #### The Dice score coefficient (DSC)[3] is a measure of overlap widely used to assess segmentation performance when a gold standard or ground truth is available. The 2-class variant of the Dice loss, denoted 
-${image?fileName=dice%2Epng&align=Left&scale=100&responsive=true&altText=dice}
+![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/dice.png)
 
 
 #### _Jaccard loss:_
 #### The Intersection of Union for 2 class:
 
 
-${image?fileName=jac%2Epng&align=None&scale=100&responsive=true&altText=jac}
+![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/jac.png)
 ####  Where yi and rn ∈ {0,1} is ground truth and  y^i and rn is the result of the model ,
 
 
-${image?fileName=tot%2Epng&align=None&scale=100&responsive=true&altText=jac}
+![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/tot.png)
 ## Metrics and Training Parameters
 
 #### Mean IOU (Intersection over union) and F1-score (Dice score) was used to evaluate the model. A threshold of 0.5 was used for both metrics.
-${image?fileName=Screenshot 2021%2D09%2D18 at 11%2E23%2E22 AM%2Epng&align=Center&scale=100&responsive=true&altText=iou}
+![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/IOU.png)
 
 
 #### The model was trained on 85% of the dataset with 15% as validation. The objective was to maximize the validation IOU score. The learning scheduler was used to decrease the learning rate with the number of epochs with certain factors. The value of this factor was taken as 0.9. The model was trained on a computer with 3 NVIDIA GeForce GTX 1080 Ti with 11176MiB RAM each and 24 Intel(R) Xeon(R) CPU E5-2620 0 @ 2.00GHz processor. The model was trained on all 3 GPUs in mirror training mode. The model was trained for 50 epochs with a batch size of 8.
-${image?fileName=withoutaugwithoutbce%5Floss2%2Epng&align=Center&scale=100&responsive=true&altText=loss}
+![alt text](http://url/to/img.png)
 ## Testing random testing images
-${image?fileName=Screenshot 2021%2D09%2D18 at 12%2E53%2E11 PM%2Epng&align=Center&scale=100&responsive=true&altText=test1}
-${image?fileName=Screenshot 2021%2D09%2D18 at 12%2E55%2E16 PM%2Epng&align=Center&scale=80&responsive=true&altText=test2}
+![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/test2.png)
+![alt text](https://github.com/rishav1122/FetReg-2021-Placental-Vessel-Segmentation/blob/main/Images/test1.png)
 
 # **Conclusion/Discussion**
 
